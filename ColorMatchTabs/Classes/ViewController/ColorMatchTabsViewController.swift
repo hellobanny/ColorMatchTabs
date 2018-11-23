@@ -19,6 +19,7 @@ public protocol ColorMatchTabsViewControllerDataSource: class {
     func tabsViewController(_ controller: ColorMatchTabsViewController, hightlightedIconAt index: Int) -> UIImage
     func tabsViewController(_ controller: ColorMatchTabsViewController, tintColorAt index: Int) -> UIColor
 
+    func tabsViewControllerShowScrollMenuBackground() -> Bool
 }
 
 public protocol ColorMatchTabsViewControllerDelegate: class {
@@ -172,7 +173,13 @@ private extension ColorMatchTabsViewController {
         let color = colorMatchTabDataSource?.tabsViewController(self, tintColorAt: index) ?? .white
         
         titleLabel.textColor = color
-        _view.scrollMenu.backgroundColor = color.withAlphaComponent(0.2)
+        
+        if colorMatchTabDataSource?.tabsViewControllerShowScrollMenuBackground() ??  true {
+            _view.scrollMenu.backgroundColor = color.withAlphaComponent(0.2)
+        }
+        else {
+            _view.scrollMenu.backgroundColor = UIColor.clear
+        }
     }
     
     func updateScrollEnabled() {

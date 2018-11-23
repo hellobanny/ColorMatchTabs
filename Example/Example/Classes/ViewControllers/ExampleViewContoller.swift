@@ -26,6 +26,10 @@ class ExampleViewContoller: ColorMatchTabsViewController {
 }
 
 extension ExampleViewContoller: ColorMatchTabsViewControllerDataSource {
+    func tabsViewControllerShowScrollMenuBackground() -> Bool {
+        return false
+    }
+    
     
     func numberOfItems(inController controller: ColorMatchTabsViewController) -> Int {
         return TabItemsProvider.items.count
